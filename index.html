@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Demo annotation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  
+</head>
+
+<body>
+	<div class='loader-ring'>
+	  <div class='loader-ring-light'></div>
+	  <div class='loader-ring-track'></div>
+	</div>
+  	<div class="annotation">
+	</div>
+	<canvas id="number" width="64" height="64"></canvas>
+	<canvas id="main3d"></canvas>
+
+	<div id="tools">
+		<div class="button reset-view" title="Về vị trí gốc"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+		<div class="button tutorial" title="Hướng dẫn"><i class="fa fa-question" aria-hidden="true"></i></div>
+		<div class="button share" title="Chia sẻ"><i class="fa fa-share-alt" aria-hidden="true"></i></div>
+		<div class="button zoom expand" title="Toàn màn hình"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
+		<div class="button zoom compress" title="Thu nhỏ"><i class="fa fa-compress" aria-hidden="true"></i></i></div>
+		<div class="button" title="Xem tại toandungmedia"><i class="fa fa-home" aria-hidden="true"></i></i></i></div>
+	</div>
+
+	<div id="tutorial-container" class="modal-container">
+		<div id="tutorial-content" class="modal-content">
+			<div class="modal-header">
+				<h2>Hướng dẫn</h2>
+				<span id="closeTutorial" class="closeModal"><i class="fa fa-times" aria-hidden="true"></i></span>
+			</div>
+			<div class="modal-body">
+				<img src="assets/guide.png" alt="">
+			</div>
+		</div>
+	</div>
+
+	<div id="share-container" class="modal-container">
+		<div id="share-content" class="modal-content">
+			<div class="modal-header">
+				<h2>Chia sẻ</h2>
+				<span id="closeShare" class="closeModal"><i class="fa fa-times" aria-hidden="true"></i></span>
+			</div>
+			<div class="modal-body">
+				<p>Copy đoạn mã dưới đây dán vào bất cứ nơi nào bạn muốn chia sẻ</p>
+				<textarea rows="4" type="text" id="iframeLink" data-clipboard-target="#iframeLink"></textarea>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
+	<script src='assets/js/jquery-1.9.0.js'></script>
+	<script src='assets/js/three.js'></script>
+	<script src='assets/js/OrbitControls.js'></script>
+	<script src='https://unpkg.com/tippy.js@beta/dist/tippy.all.min.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+
+    <script  src="assets/js/index.js?v=2.0"></script>
+    <script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+	  
+</body>
+</html>
