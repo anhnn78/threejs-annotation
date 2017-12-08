@@ -123,7 +123,7 @@ function init() {
 
     // Model
     var loader = new THREE.JSONLoader(manager);
-    loader.load('assets/model/textures/Nara.json', function(geometry, mat) {
+    loader.load('assets/model/Nara.json', function(geometry, mat) {
 
         mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(mat));
 
