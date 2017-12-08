@@ -1,9 +1,9 @@
 'use strict';
 var loader = document.querySelector('.loader-ring');
-var resetViewBtn = document.querySelector('.reset-view');
-var tutorialBtn = document.querySelector('.tutorial');
-var shareBtn = document.querySelector('.share');
-var zoom = document.getElementsByClassName('zoom');
+var resetViewBtn = $('.reset-view');
+var tutorialBtn = $('.tutorial');
+var shareBtn = $('.share');
+var zoom = $('.zoom');
 var zoomExpand = document.querySelector('.zoom.expand');
 var zoomCompress = document.querySelector('.zoom.compress');
 var isZoomed = false;
@@ -58,11 +58,11 @@ ctx.beginPath();
 ctx.arc(x, y, radius, startAngle, endAngle);
 ctx.fill();
 
-ctx.strokeStyle = "rgb(255, 255, 255)";
-ctx.lineWidth = 3;
-ctx.beginPath();
-ctx.arc(x, y, radius, startAngle, endAngle);
-ctx.stroke();
+// ctx.strokeStyle = "rgb(255, 255, 255)";
+// ctx.lineWidth = 3;
+// ctx.beginPath();
+// ctx.arc(x, y, radius, startAngle, endAngle);
+// ctx.stroke();
 
 ctx.fillStyle = "rgb(255, 255, 255)";
 ctx.font = "32px sans-serif";
@@ -85,7 +85,7 @@ var main3d = document.getElementById("main3d");
 var mouse = new THREE.Vector2(),
     INTERSECTED;
 var objects = [];
-var initCameraPos = [2000, 750, 2000];
+var initCameraPos = [1000, 500, 1000];
 var timeouts = [];
 
 // click or drag
@@ -101,7 +101,7 @@ function init() {
     camera.position.x = initCameraPos[0];
     camera.position.y = initCameraPos[1];
     camera.position.z = initCameraPos[2];
-    // camera.position.set(2000, 750, 2000)
+
     // Scene
 
     scene = new THREE.Scene();
@@ -114,7 +114,7 @@ function init() {
     lights[2] = new THREE.PointLight(0xffffff, 1, 0);
 
     lights[0].position.set(0, 2000, 0);
-    lights[1].position.set(1000, 2000, 1000);
+    lights[1].position.set(500, 1000, 500);
     lights[2].position.set(-1000, -2000, -1000);
 
     scene.add(lights[0]);
@@ -123,13 +123,13 @@ function init() {
 
     // Model
     var loader = new THREE.JSONLoader(manager);
-    loader.load('assets/untitled.json', function(geometry, mat) {
+    loader.load('assets/model/textures/Nara.json', function(geometry, mat) {
 
         mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(mat));
 
-        mesh.scale.x = 40;
-        mesh.scale.y = 40;
-        mesh.scale.z = 40;
+        mesh.scale.x = 300;
+        mesh.scale.y = 300;
+        mesh.scale.z = 300;
         scene.add(mesh);
         // objects.push(mesh)
     });
@@ -171,18 +171,21 @@ function init() {
     controls.enablePan = false;
     controls.noPan = true;
     controls.autoRotate = true;
-    controls.minDistance = 1000.0;
-    controls.maxDistance = 5000.0;
+    controls.minDistance = 500.0;
+    controls.maxDistance = 3000.0;
     controls.maxPolarAngle = Math.PI * 0.495;
     controls.target.set(0, 500, 0);
 
     window.addEventListener("resize", onWindowResize, false);
     // document.addEventListener('click', onDocumentMouseDown, false);
+
     // document.addEventListener('click', handleCloseAnnotation, false);
-    main3d.addEventListener('mousemove', onDocumentMouseMove, false);
-    main3d.addEventListener('mouseup', onDocumentMouseDown, false);
-    main3d.addEventListener('touchstart', onDocumentTouchStart, false);
-    document.addEventListener('mousewheel', onscrollHandle, false);
+
+    $(document).click(function(event){onDocumentMouseDown(event)});
+    $(document).on('mousemove', function(event){onDocumentMouseMove(event)});
+    $(document).on('touchstart', function(event){onDocumentTouchStart(event)});
+    $(document).on('mousewheel', function(event){onscrollHandle(event)});
+
 
     function onscrollHandle (e) {
         e.stopPropagation()
@@ -190,15 +193,15 @@ function init() {
     }
 
     // check click or drag 
-    main3d.addEventListener("mousedown", function(){
+    $(document).on('mousedown', function(event){
         click = 0;
-    }, false);
-    main3d.addEventListener("mousemove", function(){
+    });
+    $(document).on('mousemove', function(event){
         click = 1;
-    }, false);
-    main3d.addEventListener("touchmove", function(){
+    });
+    $(document).on('touchmove', function(event){
         click = 1;
-    }, false);
+    });
 }
 
 function onWindowResize() {
@@ -271,9 +274,13 @@ function onDocumentMouseDown(event) {
         tween.start();
         tween.onComplete(function() {
           showAnnotation(true);
+          stopRotate(false);
         });
     } else {
-        if (click == 0) {showAnnotation(false)}
+        if (click == 0) {
+            showAnnotation(false);
+            controls.autoRotate = true;
+        }
     }
 
     /*
@@ -312,11 +319,12 @@ function render() {
 function showAnnotation (show) {
     if (show) {
         annotation.style.display = 'block';
-        annotation.innerHTML = '<span id="close-annotation" onclick="showAnnotation(false)">✕</span><h1>Chó đá</h1><p><iframe width="100%"  src="https://www.youtube.com/embed/QgaTQ5-XfMM" frameborder="0" allowfullscreen></iframe></p><h3><a href="https://www.youtube.com/watch?v=QgaTQ5-XfMM">Xem thêm</a></h3>';
+        annotation.innerHTML = '<span id="close-annotation" onclick="showAnnotation(false)">✕</span><h1>Nara The Desert Wind</h1><p><iframe width="100%"  src="https://www.youtube.com/embed/QgaTQ5-XfMM" frameborder="0" allowfullscreen></iframe></p><h3><a href="https://www.youtube.com/watch?v=QgaTQ5-XfMM">Xem thêm</a></h3>';
     }
     else {
         annotation.style.display = 'none';
         annotation.innerHTML = '';
+        stopRotate(0);
     }
 }
 
@@ -334,8 +342,21 @@ function updateScreenPosition() {
     annotation.style.opacity = spriteBehindObject ? 0.25 : 1;
 }
 
-resetViewBtn.onclick = function (e) {
+$(document).dblclick(resetView);
+
+resetViewBtn.click( function (e) {
     e.preventDefault();
+    e.stopPropagation();
+    setTimeout(function () {
+        $(document).click();
+    }, 100)
+    resetView();
+})
+
+
+function resetView () {
+    shareModal.removeClass('active');
+    tutorialModal.removeClass('active');
     stopRotate (5000);
     var tween = new TWEEN.Tween(camera.position);
 
@@ -351,28 +372,15 @@ resetViewBtn.onclick = function (e) {
     });
 }
 
-
-for (var i = 0; i < zoom.length; i++) {
-    zoom[i].addEventListener('click', handleToggleZoom, false);
-    handleToggleZoom();
-}
+zoom.on('click', function () {
+    handleToggleZoom()
+    controls.state = -1;
+});
 
 function handleToggleZoom () {
     toggleZoom()
     isZoomed = !isZoomed;
-    toggleZoomBtn()
 }
-
-function toggleZoomBtn () {
-    if (!isZoomed) {
-        zoomExpand.style.display = 'inline-block';
-        zoomCompress.style.display = 'none';
-    } else {
-        zoomExpand.style.display = 'none';
-        zoomCompress.style.display = 'inline-block';
-    }
-}
-toggleZoomBtn()
 
 function toggleZoom () {
     let element = document.querySelector('body');
@@ -411,42 +419,61 @@ function stopRotate (time) {
             clearTimeout(timeouts[i]);
         var autoRotateAgain = setTimeout(function(){controls.autoRotate = true}, time);
         timeouts.push(autoRotateAgain);
+    } else {
+        for (var i = 0; i < timeouts.length; i++)
+        clearTimeout(timeouts[i]);
     }
 }
 
-var tutorialModal = document.getElementById('tutorial-container');
-var shareModal = document.getElementById('share-container');
-var closeTutorial = document.getElementById('closeTutorial');
-var closeShare = document.getElementById('closeShare');
+var tutorialModal = $('#tutorial-container');
+var shareModal = $('#share-container');
+var closeTutorial = $('#closeTutorial');
+var closeShare = $('#closeShare');
 
-tutorialBtn.addEventListener('click', function (e) {
+tutorialBtn.on('click', function (e) {
+    e.preventDefault();
     e.stopPropagation();
-    if (tutorialModal.classList.contains('active')) {
-        tutorialModal.classList.remove('active');
+    shareModal.removeClass('active');
+
+    if (tutorialModal.hasClass('active')) {
+        tutorialModal.removeClass('active');
     } else {
-        tutorialModal.classList.add('active');
+        tutorialModal.addClass('active');
     }
+    
+    setTimeout(function () {
+        $(document).click();
+    }, 100)
 })
 
-closeTutorial.addEventListener('click', function (e) {
+closeTutorial.on('click', function (e) {
+    e.preventDefault();
     e.stopPropagation();
-    tutorialModal.className = tutorialModal.className.replace( 'active', '' );
+    tutorialModal.removeClass('active');
+    setTimeout(function () {
+        $(document).click();
+    }, 100)
 })
 
-shareBtn.addEventListener('click', function (e) {
+shareBtn.on('click', function (e) {
+    e.preventDefault();
     e.stopPropagation();
-    if (!shareModal.classList.contains('active')) {
+
+    tutorialModal.removeClass('active');
+
+    if (!shareModal.hasClass('active')) {
         var content = document.querySelector('#iframeLink');
         content.value = '<p>Xem sản phẩm tại <a href="'+window.location.href+'">Toàn Dũng Media.</a></p><iframe id="iframe3d" width="640" height="480" src="'+window.location.href+'" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>';
-        shareModal.classList.add('active');
+        shareModal.addClass('active');
     } else {
-        shareModal.classList.remove('active');
+        shareModal.removeClass('active');
     }
 })
 
-closeShare.addEventListener('click', function (e) {
+closeShare.on('click', function (e) {
+    e.preventDefault();
     e.stopPropagation();
-    shareModal.className = shareModal.className.replace( 'active', '' );
+    shareModal.removeClass('active');
 })
 
 var clipboard = new Clipboard('#iframeLink');

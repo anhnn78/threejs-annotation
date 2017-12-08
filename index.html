@@ -5,7 +5,6 @@
   <title>Demo annotation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   
   <link rel="stylesheet" href="assets/css/style.css">
 
@@ -23,22 +22,34 @@
 	<canvas id="main3d"></canvas>
 
 	<div id="tools">
-		<div class="button reset-view" title="Về vị trí gốc"><i class="fa fa-refresh" aria-hidden="true"></i></div>
-		<div class="button tutorial" title="Hướng dẫn"><i class="fa fa-question" aria-hidden="true"></i></div>
-		<div class="button share" title="Chia sẻ"><i class="fa fa-share-alt" aria-hidden="true"></i></div>
-		<div class="button zoom expand" title="Toàn màn hình"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-		<div class="button zoom compress" title="Thu nhỏ"><i class="fa fa-compress" aria-hidden="true"></i></i></div>
-		<div class="button" title="Xem tại toandungmedia"><i class="fa fa-home" aria-hidden="true"></i></i></i></div>
+		<div class="button reset-view" title="Về vị trí gốc"></div>
+		<div class="button tutorial" title="Hướng dẫn"></div>
+		<div class="button share" title="Chia sẻ"></div>
+		<div class="button zoom expand" title="Zoom"></div>
+		<div class="button to-home-page" onclick="window.location.href='http://toandungmedia.vn'" title="Xem tại toandungmedia"></div>
 	</div>
 
 	<div id="tutorial-container" class="modal-container">
 		<div id="tutorial-content" class="modal-content">
-			<div class="modal-header">
-				<h2>Hướng dẫn</h2>
-				<span id="closeTutorial" class="closeModal"><i class="fa fa-times" aria-hidden="true"></i></span>
-			</div>
+			<span id="closeTutorial" class="closeModal">
+				<img src="assets/icons/close.png" alt="">
+			</span>
 			<div class="modal-body">
-				<img src="assets/guide.png" alt="">
+				<div class="help help-rotate">
+					<p><img src="assets/icons/icon-06.png" alt=""></p>
+					<h1>XOAY</h1>
+					<p>Giữ chuột trái hoặc kéo bằng ngón tay</p>
+				</div>
+				<div class="help help-move">
+					<p><img src="assets/icons/icon-07.png" alt=""></p>
+					<h1>DI CHUYỂN</h1>
+					<p>Dùng chuột phải hoặc kéo bằng hai ngón</p>
+				</div>
+				<div class="help help-zoom">
+					<p><img src="assets/icons/icon-08.png" alt=""></p>
+					<h1>THU PHÓNG</h1>
+					<p>Nhấn đúp hoặc di chuyển hai ngón tay</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -46,24 +57,29 @@
 	<div id="share-container" class="modal-container">
 		<div id="share-content" class="modal-content">
 			<div class="modal-header">
-				<h2>Chia sẻ</h2>
-				<span id="closeShare" class="closeModal"><i class="fa fa-times" aria-hidden="true"></i></span>
+				<h2 class="text-white">Chia sẻ với bạn bè</h2>
+				<span id="closeShare" class="closeModal">
+					<img src="assets/icons/close.png" alt="">
+				</span>
 			</div>
 			<div class="modal-body">
-				<p>Copy đoạn mã dưới đây dán vào bất cứ nơi nào bạn muốn chia sẻ</p>
 				<textarea rows="4" type="text" id="iframeLink" data-clipboard-target="#iframeLink"></textarea>
+				<p class="text-white">Copy đoạn mã phía trên dán vào bất cứ nơi nào bạn muốn chia sẻ</p>
 			</div>
 		</div>
 	</div>
+
+	<a id="tdm-logo-3d" href="http://toandungmedia.vn" target="_blank" style="">
+		<img src="http://staging.3dmaps.vn/assets/logo/tdm-white-c53fac41582abdd552c423d74ecb29bba5199de8d57759507ecdafca312fe2e9.png" alt="">
+	</a>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
-	<script src='assets/js/jquery-1.9.0.js'></script>
-	<script src='assets/js/three.js'></script>
+	<script src='assets/js/three.min.js'></script>
 	<script src='assets/js/OrbitControls.js'></script>
 	<script src='https://unpkg.com/tippy.js@beta/dist/tippy.all.min.js'></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 
-    <script  src="assets/js/index.js?v=2.0"></script>
+    <script  src="assets/js/index.js?v=3.0"></script>
     <script
 	  src="https://code.jquery.com/jquery-3.2.1.min.js"
 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

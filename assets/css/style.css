@@ -105,7 +105,7 @@ body {
   position: fixed;
   bottom: 15px;
   right: 0;
-  background: rgba(0, 150, 136, 0.3);
+  /* background: rgba(0, 150, 136, 0.3); */
   padding: 5px;
   border-bottom-left-radius: 30px;
   border-top-left-radius: 30px;
@@ -116,17 +116,68 @@ body {
 
 #tools .button {
   display: inline-block;
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  background: aliceblue;
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
   text-align: center;
-  line-height: 30px;
-  color: rgba(0, 150, 136, .5);
+  line-height: 50px;
   cursor: pointer;
+  position: relative;
   transition: .3s;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+#tools .button img {
+  width: 100%;
+}
+
+.button.reset-view {
+  background-image: url('../icons/icon-01.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.button.reset-view:hover {
+  background-image: url('../icons/icon-01-hover.png');
+}
+
+.button.tutorial {
+  background-image: url('../icons/icon-02.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.button.tutorial:hover {
+  background-image: url('../icons/icon-02-hover.png');
+}
+
+.button.share {
+  background-image: url('../icons/icon-03.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.button.share:hover {
+  background-image: url('../icons/icon-03-hover.png');
+}
+
+.button.zoom {
+  background-image: url('../icons/icon-04.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.button.zoom:hover {
+  background-image: url('../icons/icon-04-hover.png');
+}
+
+.button.to-home-page {
+  background-image: url('../icons/icon-05.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.button.to-home-page:hover {
+  background-image: url('../icons/icon-05-hover.png');
 }
 
 #tools .button:hover {
@@ -136,7 +187,7 @@ body {
 .tippy-tooltip.light-theme {
   /* Your styling here. Example: */
   background-color: rgba(255, 255, 255, .9);
-  color: rgb(0, 150, 136);
+  color: #7ca6d0;
 }
 
 .tippy-popper[x-placement^=top] .tippy-tooltip.light-theme .tippy-arrow {
@@ -167,13 +218,7 @@ body {
 
 .modal-content {
   padding: 20px;
-  background: #f5f6f6;
-  max-width: 600px;
-  max-height: 600px;
-  box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
-  -webkit-transform: translateY(-40px);
-          transform: translateY(-40px);
-  will-change: transform;
+  
   opacity: 0;
   visibility: hidden;
   -webkit-transition: all 0.8s cubic-bezier(0.13, 1.3, 0.71, 0.89);
@@ -183,6 +228,7 @@ body {
 .modal-container.active {
   opacity: 1;
   visibility: visible;
+  background: rgba(0, 0, 0, 0.6)
 }
 
 .modal-container.active .modal-content {
@@ -190,25 +236,68 @@ body {
   visibility: visible;
 }
 
-.modal-header {
-  border-bottom: 1px solid rgb(0, 150, 136);
-  padding: 0 0 10px;
-}
-
-.modal-header h2 {
-  color: rgb(0, 150, 136);
-  margin: 0;
-}
-
-.modal-header .closeModal {
+.closeModal {
   position: absolute;
-  right: 20px;
+  left: 20px;
   top: 20px;
-  color: red;
   cursor: pointer;
-  font-size: 20px
+}
+
+.closeModal img {
+  width: 30px;
 }
 
 .modal-body textarea {
   width: 100%;
+}
+
+.modal-body img {
+  width: 100px;
+}
+
+.help {
+  margin: 20px;
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+}
+
+#share-content {
+  background: #7d8183;
+  border-radius: 10px;
+}
+
+.text-white {
+  color: #fff;
+}
+
+#tdm-logo-3d {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 54px;
+  height: 35px;
+  padding: 5px;
+  background-color: rgba(0,0,0,0.26);
+  z-index: 100000;
+}
+
+@media screen and (max-width: 765px) {
+  .help {
+    width: 200px;
+    display: block;
+    margin: 0;
+  }
+
+  .help img {
+    width: 40px;
+  }
+
+  .help h1 {
+    font-size: 1em;
+  }
+
+  .help p {
+    font-size: 12px;
+  }
 }
