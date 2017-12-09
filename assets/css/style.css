@@ -184,15 +184,15 @@ body {
   color: rgba(0, 150, 136, 1)
 }
 
-.tippy-tooltip.light-theme {
+.tippy-tooltip.dark-theme {
   /* Your styling here. Example: */
-  background-color: rgba(255, 255, 255, .9);
-  color: #7ca6d0;
+  background-color: #000;
+  color: #fff;
 }
 
-.tippy-popper[x-placement^=top] .tippy-tooltip.light-theme .tippy-arrow {
+.tippy-popper[x-placement^=top] .tippy-tooltip.dark-theme .tippy-arrow {
   /* Your arrow styling here. */
-  border-top: 7px solid rgba(255, 255, 255, .9);
+  border-top: 7px solid #000;
 }
 
 .compress {

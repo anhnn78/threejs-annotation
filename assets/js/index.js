@@ -408,7 +408,7 @@ function toggleZoom () {
 
 tippy('.button', {
     arrow: true,
-    theme: 'light'
+    theme: 'dark'
 })
 
 function stopRotate (time) {
